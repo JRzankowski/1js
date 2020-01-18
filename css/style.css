@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e6e3e3;
+}
+
+
+.form {
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 85px 75px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .9);
+
+}
+
+.form__label,
+.form__input,
+.form__select--container,
+.select,
+.form__submit {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    user-select: none;
+    outline: none;
+
+}
+
+.form__select--container {
+    margin-bottom: 10px;
+}
+
+.select,
+.select__option {
+    border: 1px solid #e6e3e3;;
+    outline: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(96, 96, 96, 0.12), 0 1px 2px rgba(60, 60, 60, 0.24);
+
+}
+
+
+.form__label {
+    position: relative;
+    font-size: 1rem;
+    color: black;
+    font-weight: 700;
+
+}
+
+.form__input {
+    border: 1px solid #e6e3e3;;
+    border-radius: 2px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(96, 96, 96, 0.12), 0 1px 2px rgba(60, 60, 60, 0.24);
+    transition: .2s;
+}
+
+.form__input:hover {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+}
+
+
+.form__data--container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form__label--from,
+.form__label--to {
+    margin: 6px 0 0 0;
+    width: 45%;
+    font-size: 1.1rem;
+    color: black;
+    font-weight: 700;
+
+
+}
+
+.form__input--data-contact {
+    width: 45%;
+    cursor: pointer;
+}
+
+.form__submit {
+    font-size: 1.1rem;
+    margin-top: 30px;
+    border: 1px solid #e6e3e3;;
+    border-radius: 8px;
+    padding: 16px 32px;
+    background-color: #e6e3e3;
+    cursor: pointer;
+    color: black;
+    transition: .2s;
+}
+
+.form__submit:hover {
+    border-color: #ff5e62;
+    background-color: white;
+    color: #ff9966;
+}
+
+
+.message {
+    display: inline-block;
+    transition: .4s;
+    opacity: 0;
+    font-size: .7rem;
+    color: red;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.message.message-data {
+    width: 100%;
+}
+
+.message.message-error {
+    color: red;
+    opacity: 1;
+}
+
+@media (max-width: 515px){
+    .container {
+        background-color: white;
+    }
+    :root{
+        font-size: 12px;
+    }
+}
+
+
+
+
