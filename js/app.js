@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-// nałożenie datapickera na odpowiednie inputy + walidacja
+// nałożenie datapickera na odpowiednie inputy + jego walidacja
     $(".form__input--data-contact").datepicker({
         onClose: function () {
             if (inputDateFrom.value.length !== 0 && inputDateTo.value.length !== 0) {
+                //porownujemy czy jedna data nie jest wieksza od drugiej
                 if (inputDateFrom.value > inputDateTo.value) {
                     dataContainer.firstElementChild.classList.add("message-error");
                     inputDateFrom.style.borderColor = "red";
@@ -38,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
+// nałożenie walidacji na 3 pierwsze inputy (regex okresla litery ktorych mozemy użyć w inpucie)
     const regex = /[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]/;
     const regex2 = /[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ-]/;
+    //regex2 od regex1 rożni się tylko myslnikiem, ktory jest wymagany w nazwisku
 
     function validate(e) {
         const chars = e.target.value.split('');
@@ -57,14 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
             e.target.value = chars.join('');
         }
     }
-
     inputName.addEventListener('input', validate);
     inputSecondName.addEventListener('input', validate);
     inputSurname.addEventListener('input', validate2);
 //walidacja w czasie rzeczywistym
     [inputName, inputSecondName, inputSurname, inputNumber, select].forEach(function (el) {
         el.addEventListener("input", function () {
-
+//3 pierwsze warunki odnoszą się do elementów : inputName, inputSecondName, inputSurname. Sprawdzamy w nich liczbe wpisanych znakow
             if ((this.value.length === 0) && (this.classList.contains("text"))) {
                 this.previousElementSibling.firstElementChild.classList.remove("message-error");
                 this.classList.remove("error");
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 this.classList.remove("error");
                 this.style.boxShadow = "0 1px 3px rgba(96, 96, 96, 0.12), 0 1px 2px rgba(60, 60, 60, 0.24)";
 
-
+//ten warunek odnosi się do : inputNumber
             } else if (this.classList.contains("form__input-number")) {
                 if (this.value.length === 0) {
                     this.style.borderColor = "silver";
@@ -109,15 +110,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 //walidacja na submicie
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        let errors = [];
+    form.addEventListener("submit", function (e) {//dajemy event na cały formualrz a nie tylko na button
+        e.preventDefault(); //przerywamy domyslne dzialanie submitu (jakby tego nie bylo to strona by sie zawsze refreshowala po kliknieciu w submit)
+        let errors = []; //tablica na errory ktora powie nam czy mozna przesylac dane czy nie
         [inputName, inputSecondName, inputSurname, inputNumber, select, inputDateFrom, inputDateTo].forEach(function (el) {
-
+//warunek sprawdzajacy czy jakis input posiada error albo jest pusty. Jezeli jest to jego nazwa jest pushowana do errorow
             if (el.classList.contains("error") || (el.value.length === 0)) {
                 errors.push(el);
             }
         });
+        //teraz sprawdzamy czy sa jakies errory, jezeli tak to dajemy focus i dodatkowe czerowne obramowanie na elementy z errorami
         if (errors.length > 0) {
             errors.forEach(function (el) {
                 el.focus();
